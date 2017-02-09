@@ -1,6 +1,6 @@
 FROM oberthur/docker-ubuntu-java:jdk7_7.80.15
 
-ENV SWARM_VERSION=2.3 \
+ENV SWARM_VERSION=2.2 \
   GRADLE_VERSION=3.3 \
   SBT_VERSION=0.13.13 \
   MAVEN_VERSION=3.3.9 \
@@ -70,13 +70,13 @@ RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add - \
   && sbt exit \
   && rm -fr /tmp/* \
 
-	# install git flow
-	&& apt-get update && apt-get install -y git-flow \
+  # install git flow
+  && apt-get update && apt-get install -y git-flow --allow-unauthenticated \
 
-	# clean all cache to clean space
-	&& apt-get purge -y unzip \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& apt-get clean \
-	&& apt-get -y autoremove
+  # clean all cache to clean space
+  && apt-get purge -y unzip \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get clean \
+  && apt-get -y autoremove
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]

@@ -2,7 +2,7 @@ FROM otomato/ubuntu32:14.04
 
 RUN locale-gen en_US.UTF-8
 
-ENV SWARM_VERSION=2.3 \
+ENV SWARM_VERSION=2.2 \
   JAVA_HOME=/usr/lib/jvm/java-7-oracle \
 	JAVA_VERSION=jdk7_7.80.15\
   ANT_VERSION=1.9.8 \
