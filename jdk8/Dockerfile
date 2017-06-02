@@ -1,6 +1,6 @@
 FROM oberthur/docker-ubuntu-java:jdk8_full_8.131.11
 
-ENV SWARM_VERSION=3.4 \
+ENV SWARM_VERSION=3.3 \
   GRADLE_VERSION=3.5 \
   SBT_VERSION=0.13.15 \
   MAVEN_VERSION=3.5.0 \
@@ -16,7 +16,7 @@ ENV SWARM_VERSION=3.4 \
 ENV PATH="$PATH:$DOCKER_PATH"
 
 RUN apt-get update && apt-get install curl -y \
-  && curl -o /opt/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar
+  && curl -o /opt/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}.jar
 COPY swarm_slave.sh /usr/bin/swarm_slave.sh
 RUN chmod +x /usr/bin/swarm_slave.sh && mkdir -p /etc/supervisor/conf.d
 COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
