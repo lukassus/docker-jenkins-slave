@@ -1,8 +1,9 @@
-FROM oberthur/docker-ubuntu-java:jdk8_8.121.13
+FROM oberthur/docker-ubuntu-java:jdk8_full_8.131.11
 
-ENV SWARM_VERSION=2.2
+ENV SWARM_VERSION=3.3
 
-RUN curl -o /opt/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar 
+RUN apt-get update && apt-get install curl -y \
+   && curl -o /opt/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar 
 COPY swarm_slave.sh /usr/bin/swarm_slave.sh
 COPY socat_slave.sh /usr/bin/socat_slave.sh
 

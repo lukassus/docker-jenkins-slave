@@ -1,7 +1,7 @@
-FROM oberthur/docker-ubuntu-java:jdk8_8.121.13
+FROM oberthur/docker-ubuntu-java:jdk8_full_8.131.11 
 
-ENV SWARM_VERSION=2.2 \
-  ANT_VERSION=1.9.8 \
+ENV SWARM_VERSION=3.3 \
+  ANT_VERSION=1.10.1 \
   ANT_HOME=/usr/share/ant \
   PHANTOMJS_VERSION=2.1.1 \
 	DOCKER_PATH=/opt/docker/bin \
@@ -10,7 +10,7 @@ ENV SWARM_VERSION=2.2 \
 ENV PATH="$PATH:$DOCKER_PATH:$HOME/.rbenv/bin"
 
 # Add external repository
-RUN add-apt-repository -y ppa:brightbox/ruby-ng-experimental
+RUN apt-get update && apt-get install curl && add-apt-repository -y ppa:brightbox/ruby-ng-experimental
 RUN curl -o /opt/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar
 COPY swarm_slave.sh /usr/bin/swarm_slave.sh
 RUN chmod +x /usr/bin/swarm_slave.sh && mkdir -p /etc/supervisor/conf.d
